@@ -1,23 +1,57 @@
-# 1. Keypairs
-variable "public_key_path_development" {
-  type        = string
-  description = <<DESCRIPTION
-Keypair name used with ec2 instances on development environment
-Path to the SSH public key to be used for development authentication.
-Example: ~/.ssh/terraform_development.pub
-DESCRIPTION
-}
-
-variable "public_key_path_staging" {
-  type        = string
-  description = <<DESCRIPTION
-Keypair name used with ec2 instances on staging environment
-Path to the SSH public key to be used for staging authentication.
-Example: ~/.ssh/terraform_staging.pub
-DESCRIPTION
-}
-
 variable "project_name" {
+  type        = string
+  description = "Name of the project"
+}
+
+variable "public_key_path" {
+  type        = string
+  description = "Path to the public key for the environment"
+}
+
+variable "region" {
+  type        = string
+  description = "AWS Region"
+}
+
+variable "availability_zones" {
+  type        = list(string)
+  description = "List of availability zones"
+}
+
+variable "namespace" {
+  type        = string
+  description = "Namespace for resources"
+}
+
+variable "stage" {
+  type        = string
+  description = "Stage of deployment (e.g., development, staging)"
+}
+
+variable "name" {
+  type        = string
+  description = "Name for the VPC and subnets"
+}
+
+variable "default_security_group_deny_all" {
+  type        = bool
+  description = "Whether to deny all traffic in the default security group"
+}
+
+variable "default_route_table_no_routes" {
+  type        = bool
+  description = "Whether to remove all routes from the default route table"
+}
+
+variable "default_network_acl_deny_all" {
+  type        = bool
+  description = "Whether to deny all traffic in the default network ACL"
+}
+
+variable "network_address_usage_metrics_enabled" {
+  type        = bool
+  description = "Whether to enable network address usage metrics"
+}
   type        = string
   default     = ""
   description = "Naming of current project"
