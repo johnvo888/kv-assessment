@@ -1,2 +1,2 @@
 # kv-assessment
-Infrastructure Architecture for a Chat Internal
+Infrastructure Architecture for a Internal Chat Application
