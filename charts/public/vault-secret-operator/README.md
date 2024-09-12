@@ -6,7 +6,7 @@ helm upgrade --install vault-secrets-operator hashicorp/vault-secrets-operator -
 
 ## Setup Service Account for Vault Authentication
 ```sh
-NEW_TOKEN=$(kubectl create token kvasmt-api-sa -n sandbox)
+NEW_TOKEN=$(kubectl create token kvasmt-api-sa -n demo)
 
 echo "
 apiVersion: v1
@@ -18,9 +18,9 @@ metadata:
 type: kubernetes.io/service-account-token
 stringData:
   token: $NEW_TOKEN
-" | kubectl apply -f - -n sandbox
+" | kubectl apply -f - -n demo
 
 kubectl create clusterrolebinding kvasmt-backend-secret-auth-delegator-binding \
   --clusterrole=system:auth-delegator \
-  --serviceaccount=sandbox:kvasmt-api-sa
+  --serviceaccount=demo:kvasmt-api-sa
 ```
