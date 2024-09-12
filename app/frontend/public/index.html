@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Information System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <h1>Customer Information System</h1>
+        <div id="auth-container">
+            <h2>Authentication</h2>
+            <form id="login-form">
+                <input type="email" id="login-email" placeholder="Email" required>
+                <input type="password" id="login-password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+            <form id="register-form">
+                <input type="email" id="register-email" placeholder="Email" required>
+                <input type="password" id="register-password" placeholder="Password" required>
+                <button type="submit">Register</button>
+            </form>
+        </div>
+        <div id="customer-info-container" style="display: none;">
+            <h2>Customer Information</h2>
+            <form id="customer-form">
+                <input type="text" id="customer-name" placeholder="Name" required>
+                <input type="email" id="customer-email" placeholder="Email" required>
+                <input type="tel" id="customer-phone" placeholder="Phone">
+                <button type="submit">Submit</button>
+            </form>
+            <div id="customer-list"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

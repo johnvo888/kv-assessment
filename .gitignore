@@ -37,3 +37,28 @@ override.tf.json
 terraform.rc
 *.DS_Store
 .terraform.lock.hcl
+
+
+app/frontend/node_modules/
+app/frontend/.env
+
+# Backend
+app/backend/venv/
+app/backend/__pycache__/
+app/backend/*.pyc
+app/backend/.env
+
+# General
+.DS_Store
+*.log
+*.swp
+.idea/
+.vscode/
+
+# Build artifacts
+app/frontend/build/
+app/backend/dist/
+
+# Local configuration files
+*.local.json
+*.local.yml
