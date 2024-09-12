@@ -1,17 +1,21 @@
 module "vpc" {
-  source = "terraform-aws-modules/vpc/aws"
+  source  = "terraform-aws-modules/vpc/aws"
   version = "5.8.1"
-  name = "kvasmt-vpc-main"
-  cidr = "10.0.0.0/16"
+  name    = "${var.project_name}-vpc-${var.environment}"
+  cidr    = var.vpc_cidr
 
-  azs             = ["ap-southeast-1a", "ap-southeast-1b", "ap-southeast-1c"]
-  public_subnets  = ["10.0.0.0/19","10.0.32.0/19","10.0.64.0/19"]
+  azs             = var.availability_zones
+  public_subnets  = var.public_subnets
+  private_subnets = var.private_subnets
 
-  enable_nat_gateway = false
-  enable_vpn_gateway = false
+  enable_nat_gateway = var.enable_nat_gateway
+  enable_vpn_gateway = var.enable_vpn_gateway
+  single_nat_gateway     = var.single_nat_gateway
+  one_nat_gateway_per_az = var.one_nat_gateway_per_az
 
   tags = {
-    Terraform = "true"
-    Environment = "base"
+    Terraform   = "true"
+    Environment = var.environment
+    Project     = var.project_name
   }
 }
