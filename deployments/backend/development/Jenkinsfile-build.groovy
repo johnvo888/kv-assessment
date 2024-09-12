@@ -62,13 +62,13 @@ pipeline {
             aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 913524938299.dkr.ecr.ap-southeast-1.amazonaws.com  
 
             DOCKER_BUILDKIT=1 docker build --build-arg BUILDKIT_INLINE_CACHE=1 \
-            -t 913524938299.dkr.ecr.ap-southeast-1.amazonaws.com/development-backend:$APP_IMAGE_TAG \
-            -t 913524938299.dkr.ecr.ap-southeast-1.amazonaws.com/development-backend:latest .
+            -t 913524938299.dkr.ecr.ap-southeast-1.amazonaws.com/kvasmt/development-backend:$APP_IMAGE_TAG \
+            -t 913524938299.dkr.ecr.ap-southeast-1.amazonaws.com/kvasmt/development-backend:latest .
             
-            docker push 913524938299.dkr.ecr.ap-southeast-1.amazonaws.com/development-backend:$APP_IMAGE_TAG
-            docker push 913524938299.dkr.ecr.ap-southeast-1.amazonaws.com/development-backend:latest
-            docker rmi 913524938299.dkr.ecr.ap-southeast-1.amazonaws.com/development-backend:$APP_IMAGE_TAG
-            docker rmi 913524938299.dkr.ecr.ap-southeast-1.amazonaws.com/development-backend:latest
+            docker push 913524938299.dkr.ecr.ap-southeast-1.amazonaws.com/kvasmt/development-backend:$APP_IMAGE_TAG
+            docker push 913524938299.dkr.ecr.ap-southeast-1.amazonaws.com/kvasmt/development-backend:latest
+            docker rmi 913524938299.dkr.ecr.ap-southeast-1.amazonaws.com/kvasmt/development-backend:$APP_IMAGE_TAG
+            docker rmi 913524938299.dkr.ecr.ap-southeast-1.amazonaws.com/kvasmt/development-backend:latest
 
           '''
         }
