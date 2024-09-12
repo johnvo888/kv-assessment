@@ -1,0 +1,41 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: istio-ingress
+  namespace: istio-ingress
+spec:
+  interval: 5m
+  dependsOn:
+    - name: istio-base
+      namespace: istio-system
+    - name: istiod
+      namespace: istio-system
+  chart:
+    spec:
+      chart: gateway
+      sourceRef:
+        kind: HelmRepository
+        name: istio
+        namespace: istio-system
+      version: 1.22.2
+      interval: 1m
+  values:
+    service:
+      type: NodePort
+      ports:
+        - name: status-port
+          port: 15021
+          protocol: TCP
+          targetPort: 15021
+        - name: http2
+          port: 80
+          protocol: TCP
+          targetPort: 80
+          nodePort: 30080
+        - name: https
+          port: 443
+          protocol: TCP
+          targetPort: 443
+          nodePort: 30443
+      externalTrafficPolicy: Local
+   

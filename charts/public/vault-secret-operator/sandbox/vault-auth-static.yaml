@@ -1,0 +1,13 @@
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultAuth
+metadata:
+  name: static-auth
+  namespace: sandbox
+spec:
+  method: kubernetes
+  mount: kubernetes-auth-mount
+  kubernetes:
+    role: harmonix-backend-env-role
+    serviceAccount: harmonix-api-sa
+    audiences:
+      - "https://kubernetes.default.svc"

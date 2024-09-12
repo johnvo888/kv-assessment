@@ -1,0 +1,34 @@
+# istio-gateway.yaml
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: istio-ingressgateway
+  namespace: istio-ingress
+spec:
+  selector:
+    istio: ingress
+  servers:
+  - port:
+      number: 80
+      name: httpcd
+      protocol: HTTP
+    hosts:
+    - "cd.rockonyx.xyz"
+  - port:
+      number: 80
+      name: httpapi
+      protocol: HTTP
+    hosts:
+    - "api-sandbox.rockonyx.xyz"
+
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: all-traffic
+  namespace: istio-ingress
+spec:
+  host: "*"
+  trafficPolicy:
+    loadBalancer:
+      simple: ROUND_ROBIN
