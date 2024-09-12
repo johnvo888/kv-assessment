@@ -42,7 +42,7 @@ crds:
 global:
   # -- Default domain used by all components
   ## Used for ingresses, certificates, SSO, notifications, etc.
-  domain: cd.rockonyx.xyz
+  domain: argocd.demo.kietvo.vn
 
   # -- Common labels for the all resources
   additionalLabels: {}

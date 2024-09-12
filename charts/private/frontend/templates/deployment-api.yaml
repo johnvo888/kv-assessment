@@ -1,0 +1,49 @@
+{{- $api := .Values.deployments.api -}}
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: frontend
+    {{- include "frontend.labels" . | nindent 4 }}
+spec:
+  replicas: {{ $api.replicaCount }}
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      annotations: {}
+      labels:
+        app: frontend
+    spec:
+      serviceAccountName: frontend-sa
+      containers:
+      - name: api
+        command:
+          - /bin/sh
+          - -c
+          - {{ $api.command }}
+        image: "{{ template "image" . }}"
+        imagePullPolicy: {{ .Values.global.image.pullPolicy }}
+        ports:
+        - name: http
+          containerPort: {{ $api.containerPort }}
+          protocol: TCP
+        envFrom:
+        - secretRef:
+            name: frontend-env
+        volumeMounts:
+          {{- range $api.volumeMounts }}
+          - name: {{ .name }}
+            mountPath: {{ .mountPath }}
+          {{- end }}
+      volumes:
+      - name: app-logs
+        emptyDir: {}
+      imagePullSecrets:
+        {{- range $.Values.global.imagePullSecrets }}
+        - name: {{ .name }}
+        {{- end }}

@@ -1,0 +1,16 @@
+{{- $api := .Values.deployments.api -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  labels:
+    {{- include "frontend.labels" $ | nindent 4 }}
+spec:
+  type: {{ $api.service.type }}
+  ports:
+    - port: {{ $api.service.port }}
+      targetPort: {{ $api.containerPort }}
+      protocol: TCP
+      name: http
+  selector:
+    app: frontend

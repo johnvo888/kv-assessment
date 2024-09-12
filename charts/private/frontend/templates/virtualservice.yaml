@@ -1,0 +1,25 @@
+{{- $api := .Values.deployments.api -}}
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: frontend
+  labels:
+    {{- include "kvasmt-backend.labels" $ | nindent 4 }}
+spec:
+  hosts:
+    {{- range $api.virtualservice.hosts }}
+    - {{ . }}
+    {{- end }}
+  gateways:
+    {{- range $api.virtualservice.gateways }}
+    - {{ . }}
+    {{- end }}
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: frontend.demo.svc.cluster.local
+        port:
+          number: {{ $api.service.port }}

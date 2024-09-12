@@ -7,7 +7,7 @@ spec:
   method: kubernetes
   mount: kubernetes-auth-mount
   kubernetes:
-    role: harmonix-backend-env-role
-    serviceAccount: harmonix-api-sa
+    role: kvasmt-backend-env-role
+    serviceAccount: kvasmt-api-sa
     audiences:
       - "https://kubernetes.default.svc"

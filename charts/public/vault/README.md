@@ -44,11 +44,11 @@ TODO: Guide users through getting your code up and running on their own system. 
 ```sh
 vault auth enable -path kubernetes kubernetes
 
-echo 'path "harmonix-backend/data/env" {
+echo 'path "kvasmt-backend/data/env" {
   capabilities = ["read", "list"]
-}' > harmonix-backend-policy.hcl
+}' > kvasmt-backend-policy.hcl
 
-vault policy write harmonix-backend-policy harmonix-backend-policy.hcl
+vault policy write kvasmt-backend-policy kvasmt-backend-policy.hcl
 
 SA_NAME=$(kubectl get sa vault -o jsonpath="{.secrets[0].name}" -n vault)
 SA_JWT_TOKEN=$(kubectl get secret $SA_NAME -o jsonpath="{.data.token}" -n vault | base64 --decode)
@@ -65,13 +65,13 @@ vault write auth/kubernetes/config \
     kubernetes_ca_cert="$SA_CA_CRT" \
     issuer="https://kubernetes.default.svc"
 
-vault write auth/kubernetes/role/harmonix-backend-env-role \
-    bound_service_account_names=harmonix-api-sa \
+vault write auth/kubernetes/role/kvasmt-backend-env-role \
+    bound_service_account_names=kvasmt-api-sa \
     bound_service_account_namespaces=production \
-    policies=harmonix-backend-policy \
+    policies=kvasmt-backend-policy \
     ttl=24h
 
-kubectl create clusterrolebinding harmonix-backend-secret-auth-delegator-binding \
+kubectl create clusterrolebinding kvasmt-backend-secret-auth-delegator-binding \
   --clusterrole=system:auth-delegator \
-  --serviceaccount=production:harmonix-api-sa
+  --serviceaccount=production:kvasmt-api-sa
 ```

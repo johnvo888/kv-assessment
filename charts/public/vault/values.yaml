@@ -237,7 +237,7 @@ server:
     size: 10Gi
     # Name of the storage class to use.  If null it will use the
     # configured default Storage Class.
-    storageClass: gp2
+    storageClass: ebs-sc
     # Access Mode of the storage device being used for the PVC
     accessMode: ReadWriteOnce
 

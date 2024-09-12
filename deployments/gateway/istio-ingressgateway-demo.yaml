@@ -10,16 +10,16 @@ spec:
   servers:
   - port:
       number: 80
-      name: httpcd
+      name: httpargocd
       protocol: HTTP
     hosts:
-    - "cd.rockonyx.xyz"
+    - "argocd.demo.kietvo.vn"
   - port:
       number: 80
-      name: httpapi
+      name: httpvault
       protocol: HTTP
     hosts:
-    - "api-sandbox.rockonyx.xyz"
+    - "vault.demo.kietvo.vn"
 
 ---
 apiVersion: networking.istio.io/v1beta1
