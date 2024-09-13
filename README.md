@@ -70,14 +70,16 @@ tofu apply -var-file=environments/development/<module-nam>.tfvars
 ```sh
 cd provisions/infrastructure/modules/network 
 tofu init 
-tofu workspace select development tofu plan -var-file=../../environments/development/network.tfvars 
+tofu workspace select development 
+tofu plan -var-file=../../environments/development/network.tfvars 
 tofu apply -var-file=../../environments/development/network.tfvars
 ```
 
 1. Initialize EKS
 ```sh
 cd provisions/infrastructure/modules/eks/ 
-tofu init tofu workspace select development 
+tofu init 
+tofu workspace select development 
 tofu plan -var-file=../../environments/development/eks.tfvars 
 tofu apply -var-file=../../environments/development/eks.tfvars
 ```
