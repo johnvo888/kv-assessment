@@ -2,9 +2,9 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: frontend
+  name: backend
   labels:
-    {{- include "kvasmt-frontend.labels" $ | nindent 4 }}
+    {{- include "kvasmt-backend.labels" $ | nindent 4 }}
 spec:
   hosts:
     {{- range $app.virtualservice.hosts }}
@@ -20,6 +20,6 @@ spec:
         prefix: /
     route:
     - destination:
-        host: frontend.demo.svc.cluster.local
+        host: backend.demo.svc.cluster.local
         port:
           number: {{ $app.service.port }}

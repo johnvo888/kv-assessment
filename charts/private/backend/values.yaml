@@ -1,23 +1,17 @@
 global:
   image:
     registry: 913524938299.dkr.ecr.ap-southeast-1.amazonaws.com
-    repository: development-frontend
+    repository: kvasmt/backend-backend
     tag: latest
     pullPolicy: Always
-  imagePullSecrets:
-    - name: ecr-secret
 
 deployments:
   app:
     command: ""
     replicaCount: 1
-    containerPort: 3000
+    containerPort: 5000
     service:
       type: ClusterIP
       port: 80
-    virtualservice:
-      hosts:
-        - "demo.kietvo.vn"
-      gateways:
-        - istio-ingress/istio-ingressgateway
+    virtualservice: {}
 

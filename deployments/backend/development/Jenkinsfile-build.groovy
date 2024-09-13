@@ -74,7 +74,14 @@ pipeline {
         }
       }
     }
-
+ /* 
+ TODO: update bash script commit tag version of file charts/private/backend/values.yaml , and argocd sync cli
+ 
+ 
+ 
+ 
+ 
+ */
 	//   stage('Deploy ') {
     //   steps {
     //     }

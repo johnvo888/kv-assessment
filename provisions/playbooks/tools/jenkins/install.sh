@@ -1,8 +1,3 @@
-#Runbook 
-
-TODO: create ansible playbook for Jenkins
-
-```sh
 sudo apt update -y && sudo apt upgrade -y
 sudo apt install openjdk-21-jdk -y
 sudo wget -O /usr/share/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
@@ -37,4 +32,3 @@ unzip awscliv2.zip
 sudo ./aws/install
 aws
 crl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-```
