@@ -30,6 +30,10 @@ My deployment platform architecture consists of 3 layers:
 
 I use Terraform for provisioning cloud resources, utilizing the workspace model and variable files (.tfvars) for environment-specific configurations.
 
+## Note:
+ Route53, Application Load Balancer, and ECR are currently set up manually.
+ TODO: Implement IaC for these resources.
+
 ### Deployment Process
 
 To deploy to a specific environment (e.g., "development"):
@@ -78,11 +82,11 @@ tofu plan -var-file=../../environments/development/eks.tfvars
 tofu apply -var-file=../../environments/development/eks.tfvars
 ```
 
-1. Initialize Kubernetes resources in `charts/public/` and `provisions/`
+2. Initialize Kubernetes resources in `charts/public/` and `provisions/`
 - Setup Jenkins by running the script in `playbooks/tools/jenkins/install.sh`
 
-1. Create SSH key (RSA) for GitHub "deploy key" to establish connections between GitHub, Jenkins, and ArgoCD
+3. Create SSH key (RSA) for GitHub "deploy key" to establish connections between GitHub, Jenkins, and ArgoCD
 
-2. For Helm chart installation steps, refer to the README.md in the `charts` folder
+4. For Helm chart installation steps, refer to the README.md in the `charts` folder
 
-Note: Route53, Application Load Balancer, and ECR are currently set up manually. TODO: Implement IaC for these resources.
+
