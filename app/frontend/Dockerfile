@@ -1,20 +1,23 @@
-# Use Node.js 22 Alpine as the parent image
-FROM node:22-alpine
+# Stage 0, "build-stage", based on Node.js, to build and compile the frontend
+FROM node:20 AS build-stage
 
-# Set the working directory in the container
-WORKDIR /usr/src/app
+WORKDIR /app
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
+COPY package*.json /app/
 
-# Install dependencies
 RUN npm install
 
-# Copy the current directory contents into the container
-COPY . .
+COPY ./ /app/
 
-# Make port 3000 available to the world outside this container
-EXPOSE 3000
+ARG VITE_API_URL=${VITE_API_URL}
 
-# Run the app when the container launches
-CMD ["node", "server.js"]
+RUN npm run build
+
+
+# Stage 1, based on Nginx, to have only the compiled app, ready for production with Nginx
+FROM nginx:1
+
+COPY --from=build-stage /app/dist/ /usr/share/nginx/html
+
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./nginx-backend-not-found.conf /etc/nginx/extra-conf.d/backend-not-found.conf

@@ -22,27 +22,12 @@ spec:
       serviceAccountName: frontend-sa
       containers:
       - name: app
-        command:
-          - /bin/sh
-          - -c
-          - {{ $app.command }}
         image: "{{ template "image" . }}"
         imagePullPolicy: {{ .Values.global.image.pullPolicy }}
         ports:
         - name: http
           containerPort: {{ $app.containerPort }}
           protocol: TCP
-        envFrom:
-        - secretRef:
-            name: frontend-env
-        volumeMounts:
-          {{- range $app.volumeMounts }}
-          - name: {{ .name }}
-            mountPath: {{ .mountPath }}
-          {{- end }}
-      volumes:
-      - name: app-logs
-        emptyDir: {}
       imagePullSecrets:
         {{- range $.Values.global.imagePullSecrets }}
         - name: {{ .name }}

@@ -1,17 +1,14 @@
 global:
   image:
     registry: 913524938299.dkr.ecr.ap-southeast-1.amazonaws.com
-    repository: development-frontend
+    repository: kvasmt/development-frontend
     tag: latest
     pullPolicy: Always
-  imagePullSecrets:
-    - name: ecr-secret
 
 deployments:
   app:
-    command: ""
     replicaCount: 1
-    containerPort: 3000
+    containerPort: 80
     service:
       type: ClusterIP
       port: 80

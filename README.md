@@ -40,13 +40,13 @@ To deploy to a specific environment (e.g., "development"):
 
 1. Use Tofu CLI to select the appropriate workspace:
 ```sh
-cd provisions/infrastructure/modules/<module-name>
+cd provisions/infrastructure/main/<name>
 tofu workspace select development
 ```
 2. Plan and apply using the environment-specific .tfvars file:
 ```sh
-tofu plan -var-file=environments/development/<module-nam>.tfvars 
-tofu apply -var-file=environments/development/<module-nam>.tfvars
+tofu plan -var-file=environments/development/<name>.tfvars 
+tofu apply -var-file=environments/development/<name>.tfvars
 ```
 
 ## CI/CD
@@ -68,7 +68,7 @@ tofu apply -var-file=environments/development/<module-nam>.tfvars
 
 1. Initialize Network
 ```sh
-cd provisions/infrastructure/modules/network 
+cd provisions/infrastructure/main/network 
 tofu init 
 tofu workspace select development 
 tofu plan -var-file=../../environments/development/network.tfvars 
@@ -77,7 +77,7 @@ tofu apply -var-file=../../environments/development/network.tfvars
 
 1. Initialize EKS
 ```sh
-cd provisions/infrastructure/modules/eks/ 
+cd provisions/infrastructure/main/eks/ 
 tofu init 
 tofu workspace select development 
 tofu plan -var-file=../../environments/development/eks.tfvars 
