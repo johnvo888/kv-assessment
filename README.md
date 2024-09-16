@@ -2,6 +2,22 @@
 
 This repository contains the Infrastructure as Code for my assessment, including Terraform code, Kubernetes resources, Jenkinsfile, Dockerfile, and application source code.
 
+![CI/CD work flow high-level architect](diagram/diagram.png)
+
+## Technical Stack
+
+- Version Control: Git (GitHub)
+- Cloud Provider: AWS Cloud
+- CI: Jenkins
+- CD: ArgoCD
+- Infrastructure as Code: Terraform with OpenTofu CLI
+- Load Balancer: Application Load Balancer (ALB)
+- Secret Management: HashiCorp Vault
+- Web App Framework: FastAPI Fullstack Template
+- Database: PostgreSQL
+- Monitoring: Prometheus & Grafana
+- Logging: Elasticsearch, Filebeat, & Kibana
+
 ## Architecture Overview
 
 My deployment platform architecture consists of 3 layers:
@@ -59,7 +75,7 @@ tofu apply -var-file=environments/development/<name>.tfvars
 - Jenkins: jenkins.demo.kietvo.vn
 - ArgoCD: argocd.demo.kietvo.vn
 - Vault: vault.demo.kietvo.vn
-- TODO: Application: demo.kietvo.vn
+- Application: demo.kietvo.vn
 - TODO: SonarQube - sonarqube.demo.kietvo.vn
 - TODO: Monitoring - grafana.demo.kietvo.vn
 - TODO: Logging - kibana.demo.kietvo.vn

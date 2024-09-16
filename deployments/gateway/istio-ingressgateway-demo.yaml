@@ -20,7 +20,12 @@ spec:
       protocol: HTTP
     hosts:
     - "vault.demo.kietvo.vn"
-
+  - port:
+      number: 80
+      name: httpapp
+      protocol: HTTP
+    hosts:
+    - "demo.kietvo.vn"
 ---
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule

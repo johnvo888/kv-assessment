@@ -1,8 +1,5 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# Installation guide
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
 1.	Installation fluxcd
 2.	Create the Istio HelmRepository custom resource
 3.	Create istio base and istiod

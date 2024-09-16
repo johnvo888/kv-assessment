@@ -11,7 +11,7 @@ pipeline {
   parameters {
     text(
       name: 'List_TARGET',
-      defaultValue: """jenkins.demo.kietvo.vn
+      defaultValue: """demo.kietvo.vn
 """,
       description: "List of url for OWASP ZAP Scan"
     )
