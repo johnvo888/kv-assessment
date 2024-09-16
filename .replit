@@ -1,0 +1,8 @@
+modules = ["bash", "nodejs-22", "nix", "docker"]
+run = "echo \"hello world !\""
+
+[nix]
+channel = "stable-24_05"
+
+[deployment]
+run = ["sh", "-c", "echo \"hello world !\""]

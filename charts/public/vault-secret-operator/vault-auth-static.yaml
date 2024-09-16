@@ -7,7 +7,7 @@ spec:
   method: kubernetes
   mount: kubernetes-auth-mount
   kubernetes:
-    role: kvasmt-backend-env-role
-    serviceAccount: kvasmt-api-sa
+    role: backend-env-role
+    serviceAccount: backend-sa
     audiences:
       - "https://kubernetes.default.svc"
