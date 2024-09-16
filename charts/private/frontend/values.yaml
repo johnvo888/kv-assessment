@@ -2,7 +2,7 @@ global:
   image:
     registry: 913524938299.dkr.ecr.ap-southeast-1.amazonaws.com
     repository: kvasmt/development-frontend
-    tag: latest
+    tag: frontend-app-5
     pullPolicy: Always
 
 deployments:

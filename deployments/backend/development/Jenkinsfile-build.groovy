@@ -74,18 +74,42 @@ pipeline {
         }
       }
     }
- /* 
- TODO: update bash script commit tag version of file charts/private/backend/values.yaml , and argocd sync cli
- 
- 
- 
- 
- 
- */
-	//   stage('Deploy ') {
-    //   steps {
-    //     }
-  } // End stages
+
+    stage('Update Version and Deploy') {
+      steps {
+        script {
+          // Get ArgoCD credentials from Vault
+          def vaultAddress = 'https://vault.demo.kietvo.vn'
+          def vaultCredentials = [
+            [path: 'secret/argocd', secretValues: [
+              [envVar: 'ARGOCD_USERNAME', vaultKey: 'username'],
+              [envVar: 'ARGOCD_PASSWORD', vaultKey: 'password'],
+              [envVar: 'ARGOCD_SERVER', vaultKey: 'server']
+            ]]
+          ]
+          
+          withVault([vaultUrl: vaultAddress, vaultCredentialId: 'vault-approle', secrets: vaultCredentials]) {
+            // Update the tag version in values.yaml
+            sh """
+              sed -i 's/tag: .*/tag: ${APP_IMAGE_TAG}/' charts/private/backend/values.yaml
+              git config user.email "jenkins-bot-demo@kietvo.vn"
+              git config user.name "Jenkins-bot"
+              git add charts/private/backend/values.yaml
+              git commit -m "Update backend image tag to ${APP_IMAGE_TAG}"
+              git push origin ${params.gitBranch}
+            """
+
+            // Deploy using ArgoCD
+            sh """
+              argocd login $ARGOCD_SERVER --username $ARGOCD_USERNAME --password $ARGOCD_PASSWORD --insecure
+              argocd app sync backend
+              argocd app wait backend
+            """
+          }
+        }
+      }
+    }
+  }
 
   post {
     always {
