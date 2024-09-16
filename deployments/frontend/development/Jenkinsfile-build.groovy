@@ -61,6 +61,7 @@ pipeline {
 
             aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 913524938299.dkr.ecr.ap-southeast-1.amazonaws.com  
 
+						export VITE_API_URL=http://backend.demo
             DOCKER_BUILDKIT=1 docker build --build-arg BUILDKIT_INLINE_CACHE=1 \
             -t 913524938299.dkr.ecr.ap-southeast-1.amazonaws.com/kvasmt/development-frontend:$APP_IMAGE_TAG \
             -t 913524938299.dkr.ecr.ap-southeast-1.amazonaws.com/kvasmt/development-frontend:latest .
